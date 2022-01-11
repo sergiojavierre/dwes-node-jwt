@@ -1,3 +1,3 @@
-module.exports = {
-    key: "clavejwt"
-}
+const key = "clavejwt";
+
+export { key };

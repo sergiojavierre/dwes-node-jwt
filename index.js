@@ -1,18 +1,15 @@
-const 
-    express = require('express'),
-    app = express()
+import express from "express";
+const app = express();
 
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const authController = require('./controllers/authController')
-const middleware = require('./security/middleware')
+import { router as routerUsers } from "./routes/users.routes.js";
+import { router as routerPokemon } from "./routes/pokemon.routes.js";
 
-app.post('/login', authController.doLogin)
-app.get('/auth', middleware.ensureAuth, (req,res) => {
-    res.status(200).send(`Tu username es ${req.username}`)
-})
+app.use("/users", routerUsers);
+app.use("/pokemon", routerPokemon);
 
 app.listen(8080, () => {
-    console.log('server listening')
-})
+  console.log("server listening");
+});
